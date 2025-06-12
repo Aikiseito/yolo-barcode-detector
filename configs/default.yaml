@@ -1,0 +1,40 @@
+defaults:
+  - data: default
+  - model: default
+  - training: default
+  - inference: default
+  - evaluation: default
+  - mlflow: default
+  - _self_
+
+# configs/data/default.yaml
+data_yaml: "data/custom_data.yaml" # Путь к моему YAML файлу с информацией о датасете
+train_dir: "data/train"
+test_dir: "data/test"
+val_dir: "data/val"
+use_dvc: True  # Использовать DVC для загрузки данных
+
+# configs/model/default.yaml
+model_name: "yolov5s.pt"  # Или путь к моей предварительно обученной модели
+
+# configs/training/default.yaml
+epochs: 20
+imgsz: 640
+batch: 16
+experiment_name: "my_yolov5s_custom"
+convert_to_onnx: True # Конвертировать ли модель в ONNX после обучения
+onnx_path: "models/my_yolov5s_custom.onnx" # Путь для сохранения ONNX модели
+
+# configs/inference/default.yaml
+model_path: "runs/detect/my_yolov5s_custom/weights/best.pt" #  "models/my_yolov5s_custom.onnx" # Путь к обученной модели
+image_paths: [] #  ["images/test/image1.jpg", "images/test/image2.png"]  # Список путей к изображениям для инференса (если нужно)
+confidence_threshold: 0.5
+draw_results: True # Рисовать bounding boxes на изображениях
+output_dir: "results" #  Папка для сохранения изображений с результатами
+
+# configs/evaluation/default.yaml
+iou_threshold: 0.5
+
+# configs/mlflow/default.yaml
+mlflow_uri: "http://127.0.0.1:8080"
+experiment_name: "barcode_detection"
