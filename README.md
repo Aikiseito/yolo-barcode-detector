@@ -1,4 +1,4 @@
-#barcode detector
+# barcode detector
 
 Детектирование зон – грубые коробки (bbox detection). Ищем одномерные и двумерные коды на фотографиях: qr, ean13, ean8, upc, 1d (нераспознанные одномерки), dm, az, pdf, id (невозможно детектировать), hd (трудно детектировать).
 
@@ -26,39 +26,39 @@ qr  | ean13 | 1d | dm | pdf | upc |  hd | id |
 
 # Моделирование
 
-# Бейзлайн
+__Бейзлайн__
 
 Сравнение со стандартной моделью YOLO (без дообучения)
 
-# Основная модель
+__Основная модель__
 
 yolov5s.pt
 
-# Внедрение
+__Внедрение__
 
 Программный пакет состоит из нескольких модулей, отвечающих за обучение и валидацию, а также за инференс модели
 
 # Установка
 
-# Скачивание данных
+__Скачивание данных__
 
-python commands.py download_data
+«`{bash}< >{python commands.py download_data}«`
 
-# Обучение
+__Обучение__
 
 python commands.py train
 
-# Инференс
+__Инференс__
 
 python commands.py infer
 
-# ONNX экспорт
+__ONNX экспорт__
 
 python commands.py export_onnx --model_path=... --output_path=...
 
-# TensorRT экспорт
+__TensorRT экспорт__
 
-python commands.py export_tensorrt --onnx_path=... --output_path=...
+«`{bash}< >{python commands.py export_tensorrt --onnx_path=... --output_path=...}«`
 
 1. Клонируйте репозиторий
     git clone https://github.com/your-username/barcode-detector.git
