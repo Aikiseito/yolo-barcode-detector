@@ -1,0 +1,10 @@
+defaults:
+  - model: yolo
+  - data: data
+  - mlflow: mlflow
+
+train:
+  epochs: 20
+  imgsz: 640
+  batch: 16
+  run_name: my_yolov5s_custom
