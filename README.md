@@ -42,45 +42,60 @@ __Внедрение__
 
 # Установка
 
-__Скачивание данных__
-
-```
-python commands.py download_data
-```
-
-__Обучение__
-
-```
-python commands.py train
-```
-
-__Инференс__
-
-```
-python commands.py infer
-```
-
-__ONNX экспорт__
-
-```
-python commands.py export_onnx --model_path=... --output_path=...
-```
-
-__TensorRT экспорт__
-
-```python commands.py export_tensorrt --onnx_path=... --output_path=...```
-
 1. Клонируйте репозиторий
     ```
-    git clone https://github.com/your-username/barcode-detector.git
-    cd barcode-detector
+    git clone https://github.com/Aikiseito/yolo-barcode-detector.git
+    cd yolo-barcode-detector
     ```
-3. Установите poetry
-   ```poetry install```
+2. Установите poetry
+   ```
+   poetry install
+   ```
+3. Установите pre-commit хуки
+   ```
+   pre-commit install
+   pre-commit run -a
+   ```
+4. Инициализируйте DVC (для удалённого доступа)
+   ```
+   dvc remote add -d storage <your-remote-url>
+   ```
+5. Скачайте данные через DVC
+   ```
+   python commands.py download_data
+   ```
+6. Обработайте данные
+    ```
+    python -m barcode_detector.data.preprocess
+    ```
+# Training
+1. Дообучите YOLO
+   ```
+   python commands.py train
+   ```
+2. Запустите inference
+   ```
+   python commands.py infer
+   ```
+3. Evaluation
+Поддерживаются следующие метрики:
+1. IoU (Intersection over Union)
+2. Hausdorff distance
+3. mAP (mean Average Precision)
 
+Оценка выполняется автоматически после inference, сравнивая предсказанные bounding boxes с ground truth.
 
+# Экспорт модели
+1. В ONNX:
+   ```
+   python commands.py export_onnx --model_path=path/to/best.pt --output_path=path/to/model.onnx
+   ```
+2. В TensorRT
+   ```
+   python commands.py export_tensorrt --onnx_path=path/to/model.onnx --output_path=path/to/model.trt
+   ```
 
-
+__Happy barcoding!!!__
 
 
 # Структура репозитория
