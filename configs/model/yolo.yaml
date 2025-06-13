@@ -1,0 +1,2 @@
+model:
+  pretrained_weights: yolov5s.pt
