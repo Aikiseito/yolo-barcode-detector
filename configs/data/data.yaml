@@ -1,0 +1,3 @@
+data:
+  yaml: custom_data.yaml
+  test_dir: data/test
