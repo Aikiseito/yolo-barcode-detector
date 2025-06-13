@@ -1,41 +1,18 @@
 import fire
-import os
-from barcode_detection.training import train
-from barcode_detection.inference import predict
-# from barcode_detection.evaluation import evaluate # Если нужен отдельный модуль
+import hydra
+from barcode_detector.models.train import train
+from barcode_detector.models.infer import infer
+from barcode_detector.models.export import export_to_onnx, export_to_tensorrt
+from barcode_detector.data.download import download_data
 
-class Commands:
-    """
-    CLI для запуска обучения, предсказания и оценки модели
-    """
-
-    def train(self, config_path: str = "configs/default.yaml"):
-        """
-        Запускает обучение модели
-
-        Args:
-            config_path (str): Путь к конфигурационному файлу Hydra.
-        """
-        train.train() #  config_path=config_path
-
-    def predict(self, config_path: str = "configs/default.yaml"):
-        """
-        Запускает предсказание модели
-
-        Args:
-            config_path (str): Путь к конфигурационному файлу Hydra
-        """
-        predict.predict() # config_path=config_path
-
-    # def evaluate(self, config_path: str = "configs/default.yaml"):
-    #     """
-    #     Запускает оценку модели
-    #
-    #     Args:
-    #         config_path (str): Путь к конфигурационному файлу Hydra
-    #     """
-    #     evaluate.evaluate(config_path=config_path)
-
+def main():
+    fire.Fire({
+        "download_data": download_data,
+        "train": train,
+        "infer": infer,
+        "export_onnx": export_to_onnx,
+        "export_tensorrt": export_to_tensorrt,
+    })
 
 if __name__ == "__main__":
-    fire.Fire(Commands)
+    main()
