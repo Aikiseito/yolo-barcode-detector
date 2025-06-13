@@ -1,0 +1,7 @@
+defaults:
+  - model: yolo
+  - data: data
+
+infer:
+  predictions_dir: results/
+  confidence: 0.5
